@@ -88,6 +88,16 @@ export class AppComponent {
     }, 500);
   }
 
+  setHoverBall() {
+    const ball = document.getElementById('ball');
+    ball.addEventListener('mouseover', () => {
+      ball.classList.add('rotate');
+    });
+    ball.addEventListener('mouseout', () => {
+      ball.classList.remove('rotate');
+    });
+  }
+
   setHoverEffect() {
     const prod = document.getElementsByClassName('product');
     // tslint:disable-next-line: prefer-for-of

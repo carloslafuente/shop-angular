@@ -1,5 +1,5 @@
 <div class="container">
-  <div @fadeTop class="section top-section">
+  <!-- <div @fadeTop class="section top-section">
     <input type="text" [(ngModel)]="title" />
 
     <h3>{{ title }}</h3>
@@ -7,8 +7,6 @@
     <button (click)="addItem()">Add item</button>
 
     <button (click)="deleteLastItem()">Delete last item</button>
-
-    <button (click)="rotate()">Press me to rotate</button>
 
     <ng-template [ngIf]="title !== 'hide'" [ngIfElse]="loading">
       <ul class="noStyleList">
@@ -33,13 +31,15 @@
 
   <div class="section">
     <img
-      [ngStyle]="{ 'max-width': '300px' }"
+      id="ball"
+      (click)="rotate()"
+      [ngStyle]="{ 'max-width': '300px', cursor: 'pointer' }"
       [ngClass]="{ rotate: title === 'ball' }"
       @fadeBottom
       [@rotate]="state"
       src="http://pngimg.com/uploads/football/football_PNG52759.png"
     />
-  </div>
+  </div> -->
 
   <div @fadeTop class="section">
     <div @fadeRight class="product" *ngFor="let product of products">
@@ -47,11 +47,7 @@
         {{ product.title }}
       </h3>
 
-      <img
-        class="product-image"
-        [src]="product.image"
-        [alt]="product.title"
-      />
+      <img class="product-image" [src]="product.image" [alt]="product.title" />
     </div>
   </div>
 </div>
