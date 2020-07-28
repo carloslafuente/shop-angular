@@ -41,7 +41,24 @@ export const fadeTop = trigger('fadeTop', [
   transition(':enter, :leave', [animate(1000)]),
 ]);
 
+export const fadeBottom = trigger('fadeBottom', [
+  state('void', style({ opacity: 0, transform: 'translateY(100%)' })),
+  transition(':enter, :leave', [animate(1000)]),
+]);
+
 export const fadeLeft = trigger('fadeLeft', [
   state('void', style({ opacity: 0, transform: 'translateX(-100%)' })),
-  transition(':enter, :leave', [animate(500)]),
+  transition(':enter, :leave', [animate(200)]),
+]);
+
+export const fadeRight = trigger('fadeRight', [
+  state('void', style({ opacity: 0, transform: 'translateX(100%)' })),
+  transition(':enter, :leave', [animate(200)]),
+]);
+
+export const rotate = trigger('rotate', [
+  state('default', style({ transform: 'rotate(0)' })),
+  state('rotated', style({ transform: 'rotate(-360deg)' })),
+  transition('rotated => default', animate('2000ms ease-out')),
+  transition('default => rotated', animate('2000ms ease-in')),
 ]);

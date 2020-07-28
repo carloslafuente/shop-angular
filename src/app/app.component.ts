@@ -1,18 +1,34 @@
-import { Component } from '@angular/core';
-import { openClose, darkLight, fadeTop, fadeLeft } from './animations';
+import { Component, OnInit } from '@angular/core';
+import {
+  openClose,
+  darkLight,
+  fadeTop,
+  fadeBottom,
+  fadeLeft,
+  fadeRight,
+  rotate,
+} from './animations';
+import { Product } from './product.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [openClose, darkLight, fadeTop, fadeLeft],
+  animations: [
+    openClose,
+    darkLight,
+    fadeTop,
+    fadeBottom,
+    fadeLeft,
+    fadeRight,
+    rotate,
+  ],
 })
 export class AppComponent {
   title = '';
-
   items: string[] = [];
-
-  products = [
+  products: Product[] = [];
+  dbProducts: Product[] = [
     {
       id: '1',
       image: 'assets/images/camiseta.png',
@@ -56,6 +72,27 @@ export class AppComponent {
       description: 'bla bla bla bla bla',
     },
   ];
+  idxProd = 0;
+  state = 'default';
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnInit(): void {
+    const prodInterval = setInterval(() => {
+      this.showProduct(this.dbProducts[this.idxProd]);
+      this.idxProd++;
+      if (this.idxProd >= this.dbProducts.length) {
+        clearInterval(prodInterval);
+      }
+    }, 500);
+  }
+
+  rotate() {
+    this.state = this.state === 'default' ? 'rotated' : 'default';
+  }
+
+  showProduct(product: Product) {
+    this.products.push(product);
+  }
 
   addItem() {
     this.items.push(`item ${this.items.length + 1}`);

@@ -1,29 +1,51 @@
-<div @fadeTop>
-  <input type="text" [(ngModel)]="title" />
+<div class="container">
+  <div @fadeTop class="section top-section">
+    <input type="text" [(ngModel)]="title" />
 
-  <h3>{{ title }}</h3>
+    <h3>{{ title }}</h3>
 
-  <button (click)="addItem()">Add item</button>
+    <button (click)="addItem()">Add item</button>
 
-  <button (click)="deleteLastItem()">Delete last item</button>
+    <button (click)="deleteLastItem()">Delete last item</button>
 
-  <ng-template [ngIf]="title !== 'hide'" [ngIfElse]="loading">
-    <ul>
-      <li @fadeLeft *ngIf="items.length === 0">
-        Empty list
-      </li>
-      <li
-        @fadeLeft
-        [ngStyle]="{ cursor: 'pointer' }"
-        *ngFor="let item of items; let i = index"
-        (click)="deleteItem(i)"
-      >
-        {{ item }}
-      </li>
-    </ul>
-  </ng-template>
+    <button (click)="rotate()">Press me to rotate</button>
 
-  <ng-template #loading>
-    <div>Loading...</div>
-  </ng-template>
+    <ng-template [ngIf]="title !== 'hide'" [ngIfElse]="loading">
+      <ul>
+        <li @fadeRight *ngIf="items.length === 0">
+          Empty list
+        </li>
+
+        <li
+          @fadeLeft
+          [ngStyle]="{ cursor: 'pointer' }"
+          *ngFor="let item of items; let i = index"
+          (click)="deleteItem(i)"
+        >
+          {{ item }}
+        </li>
+      </ul>
+    </ng-template>
+
+    <ng-template #loading>
+      <div class="rotate">Loading...</div>
+    </ng-template>
+  </div>
+
+  <div class="section">
+    <img [ngStyle]="{'max-width': '300px'}" [ngClass]="{'rotate': title === 'ball'}"
+      [@rotate]="state"
+      src="http://pngimg.com/uploads/football/football_PNG52759.png"
+    />
+  </div>
+
+  <div @fadeTop class="section">
+    <div @fadeTop class="product" *ngFor="let product of products">
+      <h3 class="product-title">
+        {{ product.title }}
+      </h3>
+
+      <img class="product-image" [src]="product.image" [alt]="product.title" />
+    </div>
+  </div>
 </div>
