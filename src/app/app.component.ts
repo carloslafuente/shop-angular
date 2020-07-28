@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   openClose,
   darkLight,
@@ -78,12 +78,27 @@ export class AppComponent {
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(): void {
     const prodInterval = setInterval(() => {
-      this.showProduct(this.dbProducts[this.idxProd]);
-      this.idxProd++;
-      if (this.idxProd >= this.dbProducts.length) {
+      if (this.idxProd < this.dbProducts.length) {
+        this.showProduct(this.dbProducts[this.idxProd]);
+        this.idxProd++;
+      } else {
         clearInterval(prodInterval);
+        this.setHoverEffect();
       }
     }, 500);
+  }
+
+  setHoverEffect() {
+    const prod = document.getElementsByClassName('product');
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < prod.length; i++) {
+      prod[i].addEventListener('mouseover', (e) => {
+        prod[i].classList.add('product-dark');
+      });
+      prod[i].addEventListener('mouseout', (e) => {
+        prod[i].classList.remove('product-dark');
+      });
+    }
   }
 
   rotate() {
@@ -95,7 +110,7 @@ export class AppComponent {
   }
 
   addItem() {
-    this.items.push(`item ${this.items.length + 1}`);
+    this.items.push(`Item ${this.items.length + 1}`);
   }
 
   deleteLastItem() {

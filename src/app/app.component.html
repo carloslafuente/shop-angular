@@ -11,14 +11,13 @@
     <button (click)="rotate()">Press me to rotate</button>
 
     <ng-template [ngIf]="title !== 'hide'" [ngIfElse]="loading">
-      <ul>
-        <li @fadeRight *ngIf="items.length === 0">
+      <ul class="noStyleList">
+        <li @fadeTop *ngIf="items.length === 0">
           Empty list
         </li>
 
         <li
           @fadeLeft
-          [ngStyle]="{ cursor: 'pointer' }"
           *ngFor="let item of items; let i = index"
           (click)="deleteItem(i)"
         >
@@ -33,19 +32,26 @@
   </div>
 
   <div class="section">
-    <img [ngStyle]="{'max-width': '300px'}" [ngClass]="{'rotate': title === 'ball'}"
+    <img
+      [ngStyle]="{ 'max-width': '300px' }"
+      [ngClass]="{ rotate: title === 'ball' }"
+      @fadeBottom
       [@rotate]="state"
       src="http://pngimg.com/uploads/football/football_PNG52759.png"
     />
   </div>
 
   <div @fadeTop class="section">
-    <div @fadeTop class="product" *ngFor="let product of products">
+    <div @fadeRight class="product" *ngFor="let product of products">
       <h3 class="product-title">
         {{ product.title }}
       </h3>
 
-      <img class="product-image" [src]="product.image" [alt]="product.title" />
+      <img
+        class="product-image"
+        [src]="product.image"
+        [alt]="product.title"
+      />
     </div>
   </div>
 </div>
