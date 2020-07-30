@@ -7,6 +7,17 @@
   align-items: center;
   justify-content: center;
 }
+.carpet {
+  background-image: url('../assets/cover/stars.png');
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
 .section {
   display: flex;
   flex-flow: row wrap;
@@ -62,7 +73,7 @@
   }
 }
 .product-dark {
-  background: #03071e !important;
+  background: #03071e00 !important;
   * {
     color: #ffba08 !important;
   }
@@ -77,7 +88,7 @@
   margin-bottom: 15px;
 }
 .rotate {
-  animation: rotation 2s infinite linear;
+  animation: rotation 30s infinite linear;
 }
 @keyframes rotation {
   from {
